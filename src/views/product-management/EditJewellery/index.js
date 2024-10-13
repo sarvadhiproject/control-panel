@@ -28,7 +28,7 @@ const EditJewellery = ({ productId, allData, handleCancelEdit }) => {
             : '',
         //mrp: allData?.mrp ? allData?.mrp : '',
         //selling_price: allData?.selling_price ? allData?.selling_price : '',
-        // vendor_price: allData?.vendor_price ? allData?.vendor_price : '',
+        vendor_price: allData?.vendor_price ? allData?.vendor_price : '',
         // stock_quantity: allData?.stock_quantity ? allData?.stock_quantity : '',
         weight: allData?.weight ? allData?.weight : '',
         clasp_type: allData?.clasp_type ? allData?.clasp_type : '',
