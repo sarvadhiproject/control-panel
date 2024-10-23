@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Form, Upload, Button, message, Spin } from 'antd'
 import { UploadOutlined, LoadingOutlined } from '@ant-design/icons'
 import appConfig from 'configs/app.config'
-import { useForm } from 'antd/lib/form/Form'
 import { Notification, toast } from 'components/ui'
 import axios from 'axios'
 
@@ -18,8 +17,11 @@ const AddProductImages = ({ onPrev, formData, setFormData, onSubmit }) => {
     }
 
     const handleUploadCertification = ({ fileList }) => {
-        setCertificationFileList(fileList) // Update state for certification file
-        form.validateFields(['certification_file']) // Validate the new field
+        setCertificationFileList(fileList)
+        if (fileList.length > 0) {
+            form.setFieldsValue({ certification_file: fileList }) // Set form field value
+            form.validateFields(['certification_file']) // Revalidate the form field
+        }
     }
 
     const handlePreview = (file) => {
@@ -65,8 +67,18 @@ const AddProductImages = ({ onPrev, formData, setFormData, onSubmit }) => {
     const handleSubmit = async () => {
         try {
             setLoading(true)
+
             if (fileList.length < 3) {
-                message.error('Please upload at least three images')
+                message.error('Please upload at least three product images')
+                setLoading(false)
+                return
+            }
+
+            // Check if certification file is uploaded
+            if (certificationFileList.length === 0) {
+                message.error(
+                    'Please upload the product authenticity certification file'
+                )
                 setLoading(false)
                 return
             }
@@ -162,14 +174,8 @@ const AddProductImages = ({ onPrev, formData, setFormData, onSubmit }) => {
             </Form.Item>
 
             <Form.Item
-                label="Certification File"
+                label="Authenticity certificate"
                 name="certification_file"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please upload a certification file',
-                    },
-                ]} // Required validation
             >
                 <Upload
                     listType="picture-card"
@@ -178,13 +184,23 @@ const AddProductImages = ({ onPrev, formData, setFormData, onSubmit }) => {
                     onPreview={handlePreviewCertification} // Add preview handler
                     accept="image/*"
                     beforeUpload={() => false}
-                    multiple // Allow multiple file selection
+                    maxCount={1}
                 >
                     <div>
                         <UploadOutlined style={{ fontSize: '20px' }} />
                         <div style={{ marginTop: 8 }}>Upload Certification</div>
                     </div>
                 </Upload>
+                <div
+                    style={{
+                        fontWeight: 300,
+                        fontSize: '14px',
+                        color: 'red',
+                    }}
+                >
+                    ( *Updating authenticity certificate is not allowed after
+                    submitting this form )
+                </div>
             </Form.Item>
 
             <Form.Item>

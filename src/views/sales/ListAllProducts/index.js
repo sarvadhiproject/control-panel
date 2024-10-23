@@ -314,14 +314,23 @@ const ProductList = () => {
             title: 'Purity',
             dataIndex: 'purity',
             key: 'purity',
-            render: (text) => <span style={{ color: '#666' }}>{text}</span>,
             sorter: (a, b) => {
-                const purityValues = ['24k', '22k', '18k', '14k', '10k']
+                const purityValues = [
+                    '24',
+                    '22',
+                    '21',
+                    '20',
+                    '18',
+                    '16',
+                    '14',
+                    '10',
+                ]
                 return (
                     purityValues.indexOf(a.purity) -
                     purityValues.indexOf(b.purity)
                 )
             },
+            render: (text) => `${text}k`, // Display 'k' after the purity value
         },
         {
             title: 'MRP (Rs.)',
@@ -357,23 +366,23 @@ const ProductList = () => {
                 />
             ),
         },
-        {
-            title: 'Vendor Price (Rs.)',
-            dataIndex: 'vendor_price',
-            key: 'vendor_price',
-            sorter: (a, b) => a.vendor_price - b.vendor_price,
-            render: (text) => (
-                <NumberFormat
-                    displayType="text"
-                    value={(Math.round(text * 100) / 100).toFixed(2)}
-                    prefix={'₹'}
-                    thousandSeparator={true}
-                    renderText={(value) => (
-                        <span style={{ color: '#666' }}>{value}</span>
-                    )}
-                />
-            ),
-        },
+        // {
+        //     title: 'Vendor Price (Rs.)',
+        //     dataIndex: 'vendor_price',
+        //     key: 'vendor_price',
+        //     sorter: (a, b) => a.vendor_price - b.vendor_price,
+        //     render: (text) => (
+        //         <NumberFormat
+        //             displayType="text"
+        //             value={(Math.round(text * 100) / 100).toFixed(2)}
+        //             prefix={'₹'}
+        //             thousandSeparator={true}
+        //             renderText={(value) => (
+        //                 <span style={{ color: '#666' }}>{value}</span>
+        //             )}
+        //         />
+        //     ),
+        // },
         {
             title: 'Action',
             key: 'action',
@@ -574,7 +583,7 @@ const ProductList = () => {
                                 <span style={{ fontWeight: '600' }}>
                                     Purity :{' '}
                                 </span>
-                                {selectedProduct.purity}
+                                {selectedProduct.purity}k
                             </p>
                             <p>
                                 <span style={{ fontWeight: '600' }}>
@@ -584,9 +593,15 @@ const ProductList = () => {
                             </p>
                             <p>
                                 <span style={{ fontWeight: '600' }}>
-                                    Weight :{' '}
+                                    Product Weight :{' '}
                                 </span>
-                                {selectedProduct.weight}
+                                {selectedProduct.weight} grams
+                            </p>
+                            <p>
+                                <span style={{ fontWeight: '600' }}>
+                                    Gold Weight :{' '}
+                                </span>
+                                {selectedProduct.gold_weight} grams
                             </p>
                             <p>
                                 <span style={{ fontWeight: '600' }}>
@@ -614,27 +629,48 @@ const ProductList = () => {
                             </p>
                             <p>
                                 <span style={{ fontWeight: '600' }}>
-                                    MRP (Rs.) :{' '}
+                                    Making charges :{' '}
                                 </span>
-                                {selectedProduct.mrp}
+                                {selectedProduct.making_charges}%
                             </p>
                             <p>
                                 <span style={{ fontWeight: '600' }}>
-                                    Selling Price (Rs.) :{' '}
+                                    Selling Price{' '}
                                 </span>
+                                (Incl. Making charges) :{' '}
                                 {selectedProduct.selling_price}
                             </p>
                             <p>
                                 <span style={{ fontWeight: '600' }}>
+                                    MRP (Rs.) :{' '}
+                                </span>
+                                {selectedProduct.mrp}
+                            </p>
+
+                            {/* <p>
+                                <span style={{ fontWeight: '600' }}>
                                     Vendor Price (Rs.) :{' '}
                                 </span>
                                 {selectedProduct.vendor_price}
-                            </p>
+                            </p> */}
                             <p>
                                 <span style={{ fontWeight: '600' }}>
                                     Occasion :{' '}
                                 </span>
                                 {selectedProduct.occasion_type}
+                            </p>
+                            <p>
+                                <span style={{ fontWeight: '600' }}>
+                                    Authenticity certificate :{' '}
+                                </span>
+                                <a
+                                    href={`${appConfig.cloudinaryPrefix}/${selectedProduct.certification_file}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{ color: 'blue' }}
+                                >
+                                    View Certificate
+                                </a>
                             </p>
                         </Col>
                     </Row>

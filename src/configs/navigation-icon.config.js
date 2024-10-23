@@ -33,7 +33,8 @@ import { GiCrystalEarrings } from 'react-icons/gi'
 import { ImUsers } from 'react-icons/im'
 import { MdOutlineBookmarks } from 'react-icons/md'
 import { MdOutlineReviews } from 'react-icons/md'
-import { GrMoney } from 'react-icons/gr'
+import { RiMoneyDollarCircleLine } from 'react-icons/ri'
+import { GiGoldBar } from 'react-icons/gi'
 
 const navigationIcon = {
     apps: <HiOutlineViewGridAdd />,
@@ -67,13 +68,12 @@ const navigationIcon = {
     order: <MdOutlineShoppingCart />,
     coupons: <MdOutlineSell />,
     settings: <IoSettingsOutline style={{ fontSize: '22px' }} />,
-    // overview: <FaChartPie style={{ fontSize: '22px' }} />,
+    goldrates: <RiMoneyDollarCircleLine style={{ fontSize: '22px' }} />,
     overview: <FaRegChartBar style={{ fontSize: '22px' }} />,
     categories: <GiDropEarrings />,
     users: <ImUsers style={{ fontSize: '22px' }} />,
     banner: <MdOutlineBookmarks style={{ fontSize: '22px' }} />,
     webreviews: <MdOutlineReviews style={{ fontSize: '22px' }} />,
-    goldrates: <GrMoney style={{ fontSize: '22px' }} />,
 }
 
 export default navigationIcon

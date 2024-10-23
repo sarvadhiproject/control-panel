@@ -235,7 +235,9 @@ function GoldRates() {
     const updateGoldPrice = async () => {
         setLoading(true)
         try {
-            await axios.get(`${appConfig.apiPrefix}/update-gold-price`) // Call the update API
+            await axios.put(
+                `${appConfig.apiPrefix}/products/update-gold-prices`
+            ) // Call the update API
             await fetchGoldRates() // Fetch gold rates again after updating
 
             // Display toast notification after successful update

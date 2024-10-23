@@ -46,7 +46,7 @@ const AddProductPrice = ({ onNext, onPrev, formData, setFormData }) => {
                     style={{ width: '220px', height: '35px' }}
                 />
             </Form.Item>
-            <Form.Item
+            {/* <Form.Item
                 name="vendor_price"
                 label="Vendor Price"
                 rules={[{ required: true }]}
@@ -55,7 +55,7 @@ const AddProductPrice = ({ onNext, onPrev, formData, setFormData }) => {
                     type="number"
                     style={{ width: '220px', height: '35px' }}
                 />
-            </Form.Item>
+            </Form.Item> */}
             <Form.Item>
                 <div
                     style={{
